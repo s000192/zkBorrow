@@ -38,7 +38,10 @@
     "hardhat-contract-sizer": "^2.4.0",
     "hardhat-deploy": "^0.10.4",
     "hardhat-gas-reporter": "^1.0.7",
-    "snarkjs": "^0.4.19",
+    "snarkjs": "^0.4.20",
     "web3-utils": "^1.7.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.6.0"
   }
 }

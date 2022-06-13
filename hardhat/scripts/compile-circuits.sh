@@ -5,23 +5,23 @@
 cd circuits
 mkdir -p build
 
-if [ -f ./powersOfTau28_hez_final_10.ptau ]; then
-    echo "powersOfTau28_hez_final_10.ptau already exists. Skipping."
+if [ -f ./powersOfTau28_hez_final_13.ptau ]; then
+    echo "powersOfTau28_hez_final_13.ptau already exists. Skipping."
 else
-    echo 'Downloading powersOfTau28_hez_final_10.ptau'
-    wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_10.ptau
+    echo 'Downloading powersOfTau28_hez_final_13.ptau'
+    wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_13.ptau
 fi
 
 echo "Compiling: circuit..."
 
 # compile circuit
-circom circuit.circom --r1cs --wasm --sym -o build
-snarkjs r1cs info build/circuit.r1cs
+circom withdraw.circom --r1cs --wasm --sym -o build
+snarkjs r1cs info build/withdraw.r1cs
 
 # Start a new zkey and make a contribution
-snarkjs groth16 setup build/circuit.r1cs powersOfTau28_hez_final_10.ptau build/circuit_0000.zkey
-snarkjs zkey contribute build/circuit_0000.zkey build/circuit_final.zkey --name="1st Contributor Name" -v -e="random text"
-snarkjs zkey export verificationkey build/circuit_final.zkey build/verification_key.json
+snarkjs groth16 setup build/withdraw.r1cs powersOfTau28_hez_final_13.ptau build/withdraw_0000.zkey
+snarkjs zkey contribute build/withdraw_0000.zkey build/withdraw_final.zkey --name="1st Contributor Name" -v -e="random text"
+snarkjs zkey export verificationkey build/withdraw_final.zkey build/verification_key.json
 
 # generate solidity contract
-snarkjs zkey export solidityverifier build/circuit_final.zkey ../contracts/verifier.sol
+snarkjs zkey export solidityverifier build/withdraw_final.zkey ../contracts/verifier.sol
