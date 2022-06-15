@@ -24,4 +24,4 @@ snarkjs zkey contribute build/withdraw_0000.zkey build/withdraw_final.zkey --nam
 snarkjs zkey export verificationkey build/withdraw_final.zkey build/verification_key.json
 
 # generate solidity contract
-snarkjs zkey export solidityverifier build/withdraw_final.zkey ../contracts/verifier.sol
+snarkjs zkey export solidityverifier build/withdraw_final.zkey ../contracts/Verifier.sol
